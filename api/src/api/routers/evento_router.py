@@ -97,7 +97,7 @@ def actualizar_evento(
     return evento
 
 
-@router.delete("/{id}", response_model = evento_modelo.EventoPubli, responses = not_found)
+@router.delete("/{id}", response_model = evento_modelo.EventoPublic, responses = not_found)
 def borrar_evento(
     id: PARAMETROS_ID,
     db: Session = Depends(get_db)
