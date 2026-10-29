@@ -2,7 +2,7 @@
 
 EFI de Python y JavaScript de segundo año
 
-"El Imaginario" es una Cartelera colaborativa de eventos, talleres e itinerarios culturales. Creamos una interfaz para aglomerar los establecimientos/eventos culturales/recreativos de Río Cuarto en una misma página web y aplicación.
+<p>"El Imaginario" es una cartelera colaborativa de eventos, talleres e itinerarios culturales. Creamos una interfaz para aglomerar los establecimientos/eventos culturales/recreativos de Río Cuarto en una misma página web y aplicación.</p>
 
 API utilizada: Fastapi
 
