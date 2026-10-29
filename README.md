@@ -1,14 +1,13 @@
 # EFI-Python-y-JavaScript
 
-EFI de Python y JavaScript de segundo año
-
 <p>"El Imaginario" es una cartelera colaborativa de eventos, talleres e itinerarios culturales. Creamos una interfaz para aglomerar los establecimientos/eventos culturales/recreativos de Río Cuarto en una misma página web y aplicación.</p>
 
 API utilizada: Fastapi
 
-Pasos para ejecutar la aplicación:
 
-REACT:
+<h1>Pasos para ejecutar la aplicación:</h1>
+
+<h3>REACT:</h3>
 
 1-Clonar repositorio
 
