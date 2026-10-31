@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Depends
-from sqlmodel import Session, select
+from sqlmodel import Session, select, SQLModel
 from ..database import get_db
 from fastapi_pagination import Page
 from fastapi_pagination.ext.sqlmodel import paginate
@@ -12,6 +12,11 @@ router = APIRouter(
     prefix = "/usuarios",
     tags = ["usuarios"]
     )
+
+
+class LoginRequest(SQLModel):
+    email: str
+    contrasenia: str
 
 
 @router.get("/", response_model = Page[usuario_modelo.UsuarioPublic])
