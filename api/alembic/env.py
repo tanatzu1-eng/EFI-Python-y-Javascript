@@ -1,8 +1,8 @@
 from sqlmodel import SQLModel
-from src.api.models.organizacion_modelo import Organizacion
-from src.api.models.suscripcion_modelo import Suscripcion
-from src.api.models.usuario_modelo import Usuario
-from src.api.models.evento_modelo import Evento
+from api.models.organizacion_modelo import Organizacion
+from api.models.suscripcion_modelo import Suscripcion
+from api.models.usuario_modelo import Usuario
+from api.models.evento_modelo import Evento
 
 from logging.config import fileConfig
 
@@ -10,6 +10,15 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+import sys
+from pathlib import Path
+
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+SRC_DIR = ROOT_DIR / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
+
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
