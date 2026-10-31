@@ -6,7 +6,7 @@ import EventoDetalle from './tarjetas/EventoDetalle'
 import Organizaciones from './tarjetas/Organizaciones'
 import OrganizacionDetalle from './tarjetas/OrganizacionDetalle'
 import Login from './tarjetas/Login'
-import Registro from './tarjetas/Registro'
+import Registro from './tarjetas/registro'
 import Perfil from './tarjetas/Perfil'
 import Admin from './tarjetas/Admin'
 
