@@ -7,6 +7,18 @@ from datetime import datetime, timezone
 
 router = APIRouter(prefix="/seed", tags=["seed"])
 
+
+@router.get("/status")
+def status(db: Session = Depends(get_db)):
+    orgs   = len(db.exec(select(organizacion_modelo.Organizacion)).all())
+    evs    = len(db.exec(select(evento_modelo.Evento)).all())
+    users  = db.exec(select(usuario_modelo.Usuario)).all()
+    return {
+        "organizaciones": orgs,
+        "eventos": evs,
+        "usuarios": [{"id": u.id, "nombre": u.nombre, "email": u.email, "rol": u.rol} for u in users],
+    }
+
 ORGANIZACIONES = [
     "Fundación por la Cultura",
     "Asociación Riocuartense de Plásticos (ARP)",
