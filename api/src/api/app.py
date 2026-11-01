@@ -13,6 +13,7 @@ from .routers.usuario_router import router as usuario_router
 from .routers.organizacion_router import router as organizacion_router
 from .routers.evento_router import router as evento_router
 from .routers.suscripcion_router import router as suscripcion_router
+from .routers.seed_router import router as seed_router
 from .database import engine
 from .models import anidados, evento_modelo, organizacion_modelo, suscripcion_modelo, usuario_modelo
 
@@ -48,6 +49,7 @@ app.include_router(usuario_router)
 app.include_router(organizacion_router)
 app.include_router(evento_router)
 app.include_router(suscripcion_router)
+app.include_router(seed_router)
 
 app.add_middleware(
     CORSMiddleware,
