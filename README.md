@@ -1,65 +1,119 @@
 # EFI-Python-y-JavaScript
 
-<p>"El Imaginario" es una cartelera colaborativa de eventos, talleres e itinerarios culturales. Creamos una interfaz para aglomerar los establecimientos/eventos culturales/recreativos de Río Cuarto en una misma página web y aplicación.</p>
+<p>
+"El Imaginario" es una cartelera colaborativa de eventos, talleres e itinerarios culturales. Creamos una interfaz para aglomerar los establecimientos/eventos culturales/recreativos de Río Cuarto en una misma página web y aplicación.
+</p>
 
+<p>
 API utilizada: Fastapi
+</p>
 
+<br>
 
-<h1>Pasos para ejecutar la aplicación:</h1>
+<h1>
+Pasos para ejecutar la aplicación:
+</h1>
 
-<h3>REACT:</h3>
+<!--=========================================================================================================================-->
+<h3>
+REACT:
+</h3>
 
-1-Clonar repositorio
+<ol>
+<li>
+Clonar repositorio:
 
-    git clone https://github.com/Framus29/EFI-Python-y-Javascript
-    cd <nombre-de-la-carpeta>
+git clone https://github.com/Framus29/EFI-Python-y-Javascript
+cd <nombre-de-la-carpeta>
+</li>
 
-2-Estando ya ubicado en la carpeta de tu proyecto y ejecuta este comando: 
+<br>
 
-    npm install
+<li>
+Estando ya ubicado en la carpeta de tu proyecto y ejecuta este comando: 
 
-3-Para ejecutar la aplicacion:
+npm install
+</li>
 
-  *si usas vite:
-  
-    npm run dev
-    
-  *si usas Create React App:
+<br>
 
-    npm start
-  
-4-Abre tu navegador web e ingresa a la dirección local que aparece en la terminal.
+<li>
+Para ejecutar la aplicacion:
 
+npm run dev
+</li>
+
+<br>
+
+<li>
+Abre tu navegador web e ingresa a la dirección local que aparece en la terminal.
+</li>
+</ol>
+<!--=========================================================================================================================-->
+
+<br>
+
+<!--=========================================================================================================================-->
+<h3>
 FastAPI:
+</h3>
 
-1-Clonar repositorio
+<ol>
+<li>
+Tener instalado:
+<ul>
+<li>
+Python 3.10+
+</li>
 
-    git clone https://github.com/Framus29/EFI-Python-y-Javascript
-    cd <nombre-de-la-carpeta>
+<li>
+[uv](https://docs.astral.sh/uv/)
+</li>
+</ul>
+</li>
 
-2-Crear entorno virtual:
+<br>
 
-  *En windows:
-  
-    python -m venv venv
-    venv\Scripts\activate
+<li>
+Clonar repositorio:
 
-  En macOS/Linux:
+git clone https://github.com/Framus29/EFI-Python-y-Javascript
+cd <nombre-de-la-carpeta>
+</li>
 
-    python3 -m venv venv
-    source venv/bin/activate
+<br>
 
-3-Instalar las dependencias:
+<li>
+Crear entorno virtual:
 
-    pip install -r requirements.txt
+uv run fastapi dev
+</li>
 
-4-Ejecutar la aplicación:
+<br>
 
-    uvicorn main:app --reload
+<li>
+Abre tu navegador web e ingresa a la dirección local que aparece en la terminal.
+</li>
+</ol>
+<!--=========================================================================================================================-->
 
-5-Abre tu navegador web e ingresa a la dirección local que aparece en la terminal.
-  
-Integrantes: 
-  -Noel Rüegger Albert
-  -Lucas Ezequiel Lorenzoni Brown
-  -Francisco Sbarra
+<br>
+
+<h3>
+Integrantes:
+</h3>
+
+<ul>
+<li>
+Noel Rüegger Albert
+<img src =,alt =>
+</li>
+
+<li>
+Lucas Ezequiel Lorenzoni Brown
+</li>
+
+<li>
+Francisco Sbarra
+</li>
+</ul>
