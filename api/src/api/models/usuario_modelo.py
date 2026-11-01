@@ -23,3 +23,9 @@ class UsuarioCreate(UsuarioBase):
 class UsuarioPublic(UsuarioBase):
     id: int
     rol: str
+
+
+# verificacion de login:
+class LoginRequest(SQLModel):
+    email: str
+    contrasenia: str

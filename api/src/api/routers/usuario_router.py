@@ -14,11 +14,6 @@ router = APIRouter(
     )
 
 
-class LoginRequest(SQLModel):
-    email: str
-    contrasenia: str
-
-
 @router.get("/", response_model = Page[usuario_modelo.UsuarioPublic])
 def mostrar_database_usuario(
     db: Session = Depends(get_db),
@@ -130,5 +125,28 @@ def borrar_usuario(
 
     db.delete(usuario)    
     db.commit()
+
+    return usuario
+
+
+# este endpoint es necesario para poder logear usuarios y que no de un error de method not allowed:
+@router.post("/login", response_model = usuario_modelo.UsuarioPublic)
+def login(
+    datos: usuario_modelo.LoginRequest,
+    db: Session = Depends(get_db)
+    ):
+
+    usuario = db.exec(
+        select(usuario_modelo.Usuario).where(
+            usuario_modelo.Usuario.email == datos.email,
+            usuario_modelo.Usuario.contrasenia == datos.contrasenia
+        )
+    ).first()
+
+    if not usuario:
+        raise HTTPException(
+            status_code = 400,
+            detail = "el email o la contrasenia no coinciden"
+            )
 
     return usuario
