@@ -113,12 +113,28 @@ def seed(db: Session = Depends(get_db)):
         db.commit()
         resultados["eventos"] = len(EVENTOS)
 
-    # 3. Actualizar roles de admins
-    for email in ADMINS:
-        u = db.exec(select(usuario_modelo.Usuario).where(usuario_modelo.Usuario.email == email)).first()
-        if u and u.rol != "Admin":
-            u.rol = "Admin"
-            db.add(u)
+    # 3. Usuarios (crear si no existen, con el rol correcto)
+    USUARIOS = [
+        {"nombre": "Noel Ruegger Albert",  "email": "noelruegger@gmail.com",     "fecha_nacimiento": "2004-11-07", "contrasenia": "skubidubidu12", "rol": "Admin"},
+        {"nombre": "Luca Brown",           "email": "lucabrown@gmail.com",        "fecha_nacimiento": "2002-10-10", "contrasenia": "12",            "rol": "Admin"},
+        {"nombre": "Francisco Sbarra",     "email": "franciscosbarra@gmail.com",  "fecha_nacimiento": "2004-10-10", "contrasenia": "12",            "rol": "Usuario"},
+    ]
+    for datos in USUARIOS:
+        u = db.exec(select(usuario_modelo.Usuario).where(usuario_modelo.Usuario.email == datos["email"])).first()
+        if u:
+            if u.rol != datos["rol"]:
+                u.rol = datos["rol"]
+                db.add(u)
+                resultados["admins_actualizados"] += 1
+        else:
+            nuevo_u = usuario_modelo.Usuario(
+                nombre=datos["nombre"],
+                email=datos["email"],
+                fecha_nacimiento=datos["fecha_nacimiento"],
+                contrasenia=datos["contrasenia"],
+                rol=datos["rol"],
+            )
+            db.add(nuevo_u)
             resultados["admins_actualizados"] += 1
     db.commit()
 
