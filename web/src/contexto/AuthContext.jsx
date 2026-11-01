@@ -3,32 +3,43 @@ import { api } from '../api'
 
 const AuthContext = createContext(null)
 
-// La sesión vive solo en memoria: el usuario sale siempre de la base de datos
-// (POST /usuarios/login) y nada se guarda en el navegador. Al recargar la página
-// hay que volver a ingresar.
 export function AuthProvider({ children }) {
-  const [usuario, setUsuario] = useState(null)
+    // La sesion vive en memoria durante la navegacion
+    const [usuario, setUsuario] = useState(null)
 
-  const login = async (email, contrasenia) => {
-    setUsuario(await api.usuarios.login(email.trim(), contrasenia))
-  }
+    const login = async (email, contrasenia) => {
+        const respuesta = await api.usuarios.login(email.trim(), contrasenia)
+        setUsuario(respuesta)
+        return respuesta
+    }
 
-  const registrar = async (datos) => {
-    await api.usuarios.create(datos)
-    // después de crear la cuenta, validamos contra la base como cualquier login
-    await login(datos.email, datos.contrasenia)
-  }
+    const registrar = async (datos) => {
+        await api.usuarios.create(datos)
+        await login(datos.email, datos.contrasenia)
+    }
 
-  const logout = () => setUsuario(null)
+    const logout = () => {
+        setUsuario(null)
+    }
 
-  return (
-    <AuthContext.Provider
-      value={{ usuario, login, registrar, logout, esAdmin: usuario?.rol === 'Admin' }}
-    >
-      {children}
-    </AuthContext.Provider>
-  )
+    const esAdmin = usuario?.rol === 'Admin'
+
+    return (
+        <AuthContext.Provider
+            value={{
+                usuario,
+                login,
+                registrar,
+                logout,
+                esAdmin,
+            }}
+        >
+            {children}
+        </AuthContext.Provider>
+    )
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useAuth = () => useContext(AuthContext)
+export function useAuth() {
+    return useContext(AuthContext)
+}
