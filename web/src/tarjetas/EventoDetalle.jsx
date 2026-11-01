@@ -81,19 +81,19 @@ export default function EventoDetalle() {
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
                             {/* Logo de la organizacion */}
-                            <div className="w-16 h-16 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-2xl font-bold shrink-0">
+                            <div className="w-16 h-16 rounded-2xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-2xl font-bold shrink-0">
                                 🎭
                             </div>
                             <div>
                                 <div className="flex items-center gap-2">
-                                    <span className="text-xs font-semibold uppercase tracking-wider text-indigo-500 dark:text-indigo-400">
+                                    <span className="text-xs font-semibold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
                                         Evento Cultural
                                     </span>
                                     <span
                                         className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                                             e?.disponible
-                                                ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                                                : 'bg-slate-500/10 text-slate-400 border border-slate-500/20'
+                                                ? 'bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30'
+                                                : 'bg-slate-500/15 text-slate-700 dark:text-slate-400 border border-slate-500/30'
                                         }`}
                                     >
                                         {e?.disponible ? 'Disponible' : 'Agotado'}
@@ -105,12 +105,12 @@ export default function EventoDetalle() {
                                 >
                                     {e?.nombre}
                                 </h1>
-                                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                                <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
                                     Organizado por:{' '}
                                     {e?.organizacion ? (
                                         <Link
                                             to={`/organizaciones/${e.organizacion.id}`}
-                                            className="font-semibold text-indigo-500 hover:underline"
+                                            className="font-semibold text-indigo-600 dark:text-indigo-400 hover:underline"
                                         >
                                             {e.organizacion.nombre}
                                         </Link>
@@ -144,7 +144,7 @@ export default function EventoDetalle() {
                     </div>
 
                     {mensajeSuscripcion && (
-                        <p className="text-xs text-red-400 bg-red-500/10 p-2 rounded-lg">
+                        <p className="text-xs text-red-600 dark:text-red-400 bg-red-500/10 p-2.5 rounded-xl border border-red-500/20">
                             {mensajeSuscripcion}
                         </p>
                     )}
@@ -158,26 +158,26 @@ export default function EventoDetalle() {
                         className="md:col-span-1 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/60 p-5 shadow-sm flex flex-col justify-between gap-4"
                     >
                         <div>
-                            <span className="text-xs text-slate-400 uppercase tracking-wider font-semibold">
+                            <span className="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-bold">
                                 Entrada al evento
                             </span>
-                            <div className="mt-2">
-                                <p className="text-xs text-slate-500 dark:text-slate-400">
-                                    Precio de lista: {fmtPrecio(precioBase)}
+                            <div className="mt-2 space-y-1">
+                                <p className="text-xs text-slate-600 dark:text-slate-400">
+                                    Precio de lista: <strong className="text-slate-900 dark:text-slate-200">{fmtPrecio(precioBase)}</strong>
                                 </p>
-                                <p className="text-xs text-slate-500 dark:text-slate-400">
-                                    Cargo de servicio (+10%): {fmtPrecio(recargoDiezPorciento)}
+                                <p className="text-xs text-slate-600 dark:text-slate-400">
+                                    Cargo de servicio (+10%): <strong className="text-slate-900 dark:text-slate-200">{fmtPrecio(recargoDiezPorciento)}</strong>
                                 </p>
-                                <p className="text-2xl font-black text-indigo-500 dark:text-indigo-400 mt-1">
+                                <p className="text-2xl font-black text-indigo-600 dark:text-indigo-400 pt-1">
                                     {fmtPrecio(precioConRecargo)}
                                 </p>
-                                <span className="text-[10px] text-slate-400">
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">
                                     Precio final con 10% de importe incluido
                                 </span>
                             </div>
                         </div>
 
-                        <div className="pt-4 border-t border-slate-100 dark:border-slate-700/50 space-y-2">
+                        <div className="pt-4 border-t border-slate-200 dark:border-slate-700/50 space-y-2">
                             {usuario ? (
                                 <Boton
                                     variante="primario"
@@ -194,13 +194,13 @@ export default function EventoDetalle() {
                                             Ingresar para comprar
                                         </Boton>
                                     </Link>
-                                    <p className="text-[11px] text-center text-slate-400">
+                                    <p className="text-[11px] text-center text-slate-500 dark:text-slate-400">
                                         Debes estar registrado para comprar tickets
                                     </p>
                                 </div>
                             )}
 
-                            <p className="text-[11px] text-center text-slate-500">
+                            <p className="text-[11px] text-center text-slate-500 dark:text-slate-400">
                                 Entradas vendidas hasta el momento: {e?.entradas_vendidas || 0}
                             </p>
                         </div>
@@ -220,7 +220,7 @@ export default function EventoDetalle() {
                                 <strong className="block text-sm font-semibold text-slate-900 dark:text-slate-100">
                                     {e?.lugar}
                                 </strong>
-                                <span className="text-xs text-slate-500 dark:text-slate-400">
+                                <span className="text-xs text-slate-600 dark:text-slate-400">
                                     Río Cuarto, Provincia de Córdoba
                                 </span>
                             </div>
@@ -241,16 +241,16 @@ export default function EventoDetalle() {
                         </div>
 
                         {/* Recuadro visual estilizado de mapa */}
-                        <div className="h-40 rounded-xl bg-slate-200 dark:bg-slate-900/80 border border-slate-300 dark:border-slate-700 flex flex-col items-center justify-center p-4 text-center">
+                        <div className="h-40 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center p-4 text-center">
                             <span className="text-3xl mb-1">🗺️</span>
-                            <p className="text-xs font-medium text-slate-600 dark:text-slate-300">
+                            <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">
                                 {e?.lugar}
                             </p>
                             <a
                                 href={enlaceMaps}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-xs text-indigo-500 hover:underline mt-1 font-semibold"
+                                className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline mt-1 font-semibold"
                             >
                                 Abrir mapa en nueva pestaña →
                             </a>
@@ -271,84 +271,84 @@ export default function EventoDetalle() {
                     </h2>
 
                     <dl className="grid gap-4 sm:grid-cols-2 text-sm">
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/40">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
+                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                                 📅 Fecha y hora
                             </dt>
-                            <dd className="font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                                 {e && fmtFecha(e.fecha)}
                             </dd>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/40">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
+                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                                 🎭 Temática
                             </dt>
-                            <dd className="font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                                 Cultural / Artístico / Recreativo
                             </dd>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/40">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
+                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                                 🎪 Actividad
                             </dt>
-                            <dd className="font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                                 Presentación en vivo, exhibición y encuentro comunitario
                             </dd>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/40">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
+                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                                 🌟 Anfitrión/es y participantes
                             </dt>
-                            <dd className="font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                                 Artistas locales y elenco de {e?.organizacion?.nombre || 'Río Cuarto'}
                             </dd>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/40">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
+                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                                 🏷️ Descuentos
                             </dt>
-                            <dd className="font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                                 20% para estudiantes y jubilados en boletería
                             </dd>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/40">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
+                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                                 🔞 Clasificación de edad
                             </dt>
-                            <dd className="font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                                 Apto para todo público (ATP)
                             </dd>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/40">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
+                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                                 ☎️ Contacto de soporte
                             </dt>
-                            <dd className="font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                                 PuntoCulturalRioIV@gmail.com · 011-11111111
                             </dd>
                         </div>
 
-                        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/40">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
+                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                                 🌐 Redes y web oficial
                             </dt>
-                            <dd className="font-semibold text-slate-900 dark:text-slate-100 mt-0.5">
+                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                                 Instagram: @PuntoCultural_RioIV
                             </dd>
                         </div>
                     </dl>
 
                     <div>
-                        <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 mb-2">
+                        <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 mb-2">
                             Descripción personalizada del evento
                         </h3>
-                        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-900/40 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+                        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed bg-slate-50 dark:bg-slate-900/40 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
                             {e?.descripcion}
                         </p>
                     </div>
@@ -366,33 +366,33 @@ export default function EventoDetalle() {
                         {compraExitosa ? (
                             <div className="text-center py-6 space-y-3">
                                 <span className="text-5xl">🎉</span>
-                                <h3 className="text-xl font-bold text-emerald-400">
+                                <h3 className="text-xl font-bold text-emerald-600 dark:text-emerald-400">
                                     ¡Compra confirmada!
                                 </h3>
-                                <p className="text-sm text-slate-300">
+                                <p className="text-sm text-slate-700 dark:text-slate-300">
                                     Hemos reservado tus entradas para <strong>{e?.nombre}</strong>.
                                     Recibirás un comprobante digital en {usuario?.email}.
                                 </p>
                             </div>
                         ) : (
                             <form onSubmit={simularCompra} className="space-y-4">
-                                <h3 className="text-lg font-bold border-b border-slate-200 dark:border-slate-700 pb-2">
+                                <h3 className="text-lg font-bold border-b border-slate-200 dark:border-slate-700 pb-2 text-slate-900 dark:text-slate-100">
                                     Comprar entradas
                                 </h3>
 
                                 <div>
-                                    <p className="font-semibold text-sm">{e?.nombre}</p>
-                                    <p className="text-xs text-slate-400">{e?.lugar}</p>
+                                    <p className="font-bold text-sm text-slate-900 dark:text-slate-100">{e?.nombre}</p>
+                                    <p className="text-xs text-slate-600 dark:text-slate-400">{e?.lugar}</p>
                                 </div>
 
                                 <label className="block text-sm">
-                                    <span className="font-medium text-xs text-slate-400 block mb-1">
+                                    <span className="font-semibold text-xs text-slate-600 dark:text-slate-400 block mb-1">
                                         Cantidad de entradas
                                     </span>
                                     <select
                                         value={cantidadEntradas}
                                         onChange={(e) => setCantidadEntradas(Number(e.target.value))}
-                                        className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm"
+                                        className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 outline-none"
                                     >
                                         <option value="1">1 entrada</option>
                                         <option value="2">2 entradas</option>
@@ -402,12 +402,12 @@ export default function EventoDetalle() {
                                     </select>
                                 </label>
 
-                                <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 text-xs space-y-1">
-                                    <div className="flex justify-between">
+                                <div className="p-3 rounded-xl bg-slate-100 dark:bg-slate-900 text-xs space-y-1 border border-slate-200 dark:border-slate-800">
+                                    <div className="flex justify-between text-slate-700 dark:text-slate-300">
                                         <span>Precio por entrada (+10% servicio):</span>
-                                        <span>{fmtPrecio(precioConRecargo)}</span>
+                                        <span className="font-semibold">{fmtPrecio(precioConRecargo)}</span>
                                     </div>
-                                    <div className="flex justify-between font-bold text-sm pt-1 border-t border-slate-200 dark:border-slate-700 text-indigo-400">
+                                    <div className="flex justify-between font-bold text-sm pt-1 border-t border-slate-200 dark:border-slate-700 text-indigo-600 dark:text-indigo-400">
                                         <span>Total a abonar:</span>
                                         <span>{fmtPrecio(totalCompra)}</span>
                                     </div>
