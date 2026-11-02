@@ -7,7 +7,6 @@ const AuthContext = createContext(null)
 const CORREOS_ADMIN_PREDETERMINADOS = [
     'noelruegger@gmail.com',
     'lucasbrown@gmail.com',
-    'lucabrown@gmail.com',
 ]
 
 export function AuthProvider({ children }) {
