@@ -106,7 +106,6 @@ Integrantes:
 <ul>
 <li>
 Noel Rüegger Albert
-<img src =,alt =>
 </li>
 
 <li>
