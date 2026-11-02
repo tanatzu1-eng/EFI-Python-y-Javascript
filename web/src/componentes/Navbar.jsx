@@ -4,7 +4,7 @@ import { useAuth } from '../contexto/AuthContext'
 import { LogoEspacio, Boton } from './ui'
 
 export default function Navbar({ toggleSidebar }) {
-    const { usuario, logout } = useAuth()
+    const { usuario, logout, esAdmin } = useAuth()
     const [menuUsuarioAbierto, setMenuUsuarioAbierto] = useState(false)
     const [busqueda, setBusqueda] = useState('')
     const navigate = useNavigate()
@@ -134,8 +134,12 @@ export default function Navbar({ toggleSidebar }) {
                                         <p className="text-xs text-slate-600 dark:text-slate-400">
                                             {usuario.email}
                                         </p>
-                                        <span className="mt-1 inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
-                                            {usuario.rol || 'Usuario'}
+                                        <span className={`mt-1 inline-block px-2.5 py-0.5 text-xs font-semibold rounded-full ${
+                                            esAdmin
+                                                ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/30'
+                                                : 'bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20'
+                                        }`}>
+                                            {esAdmin ? 'Admin' : (usuario.rol || 'Usuario')}
                                         </span>
                                     </div>
 

@@ -18,6 +18,7 @@ class Usuario(UsuarioBase, table = True):
 
 class UsuarioCreate(UsuarioBase):
     contrasenia: str
+    rol: str = "Usuario"
 
 
 class UsuarioPublic(UsuarioBase):

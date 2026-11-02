@@ -7,6 +7,11 @@ from fastapi_pagination.ext.sqlmodel import paginate
 from ..models import usuario_modelo, anidados, suscripcion_modelo
 from ..schemas.esquemas import PARAMETROS_ID, not_found
 
+ADMINS_PREDETERMINADOS = [
+    "noelruegger@gmail.com",
+    "lucasbrown@gmail.com",
+    "lucabrown@gmail.com",
+]
 
 router = APIRouter(
     prefix = "/usuarios",
@@ -60,6 +65,13 @@ def crear_usuario(
             )
 
     db_usuario = usuario_modelo.Usuario.model_validate(nuevo_usuario)
+
+    # Si el email es de los administradores o se especifica rol Admin, asignarlo
+    if nuevo_usuario.email.lower() in ADMINS_PREDETERMINADOS:
+        db_usuario.rol = "Admin"
+    elif hasattr(nuevo_usuario, "rol") and nuevo_usuario.rol:
+        db_usuario.rol = nuevo_usuario.rol
+
     db.add(db_usuario)
     db.commit()
     db.refresh(db_usuario)
@@ -98,6 +110,8 @@ def actualizar_usuario(
     usuario.email = usuario_actualizado.email
     usuario.fecha_nacimiento = usuario_actualizado.fecha_nacimiento
     usuario.contrasenia = usuario_actualizado.contrasenia
+    if hasattr(usuario_actualizado, "rol") and usuario_actualizado.rol:
+        usuario.rol = usuario_actualizado.rol
 
     db.commit()
     db.refresh(usuario)
@@ -148,5 +162,12 @@ def login(
             status_code = 400,
             detail = "el email o la contrasenia no coinciden"
             )
+
+    # Si es uno de los correos designados como admin, asegurar su rol en la BD
+    if usuario.email.lower() in ADMINS_PREDETERMINADOS and usuario.rol != "Admin":
+        usuario.rol = "Admin"
+        db.add(usuario)
+        db.commit()
+        db.refresh(usuario)
 
     return usuario

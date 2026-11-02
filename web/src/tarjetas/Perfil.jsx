@@ -5,7 +5,7 @@ import { useFetch } from '../carga_datos'
 import { Boton, Estado, Tarjeta, Titulo } from '../componentes/ui'
 
 export default function Perfil() {
-    const { usuario, logout } = useAuth()
+    const { usuario, logout, esAdmin } = useAuth()
     const { data, loading, error, reload } = useFetch(
         () => (usuario ? api.usuarios.get(usuario.id) : Promise.resolve(null)),
         [usuario?.id]
@@ -14,6 +14,8 @@ export default function Perfil() {
     if (!usuario) {
         return <Navigate to="/login" replace />
     }
+
+    const rolMostrado = esAdmin ? 'Admin' : (data?.rol || usuario?.rol || 'Usuario')
 
     const cancelarSuscripcion = async (idSuscripcion) => {
         try {
@@ -38,13 +40,17 @@ export default function Perfil() {
                             </div>
                             <div>
                                 <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">
-                                    {data?.nombre}
+                                    {data?.nombre || usuario.nombre}
                                 </h2>
                                 <p className="text-xs text-slate-500 dark:text-slate-400">
-                                    {data?.email}
+                                    {data?.email || usuario.email}
                                 </p>
-                                <span className="mt-1 inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                                    Rol: {data?.rol}
+                                <span className={`mt-1 inline-block text-[11px] font-semibold px-2.5 py-0.5 rounded-full ${
+                                    rolMostrado === 'Admin'
+                                        ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/30'
+                                        : 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
+                                }`}>
+                                    Rol: {rolMostrado}
                                 </span>
                             </div>
                         </div>
@@ -66,7 +72,7 @@ export default function Perfil() {
                         <div>
                             <dt className="text-slate-400">Identificador de cuenta:</dt>
                             <dd className="font-semibold text-slate-800 dark:text-slate-200 mt-0.5">
-                                #{data?.id}
+                                #{data?.id || usuario.id}
                             </dd>
                         </div>
                     </dl>

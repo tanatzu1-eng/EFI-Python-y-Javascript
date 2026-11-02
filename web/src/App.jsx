@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { AuthProvider } from './contexto/AuthContext'
 import { TemaProvider } from './contexto/TemaContext'
@@ -17,14 +17,36 @@ import Perfil from './tarjetas/Perfil'
 import Admin from './tarjetas/Admin'
 
 export default function App() {
-    // Al igual que Google Classroom, por default el sidebar esta desplegado
-    const [sidebarAbierto, setSidebarAbierto] = useState(true)
+    // En PC (ancho >= 768px) esta abierto por default, en celular inicia cerrado
+    const [sidebarAbierto, setSidebarAbierto] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return window.innerWidth >= 768
+        }
+        return false
+    })
+
+    // Escuchar cambios de tamano de pantalla
+    useEffect(() => {
+        const manejarResize = () => {
+            // Si pasa a pantalla chica, cerrar para no tapar
+            if (window.innerWidth < 768) {
+                setSidebarAbierto(false)
+            } else {
+                setSidebarAbierto(true)
+            }
+        }
+
+        window.addEventListener('resize', manejarResize)
+        return () => {
+            window.removeEventListener('resize', manejarResize)
+        }
+    }, [])
 
     const toggleSidebar = () => {
         setSidebarAbierto(!sidebarAbierto)
     }
 
-    // En pantallas chicas se cierra automaticamente al tocar un enlace
+    // En pantallas chicas se cierra al tocar un enlace o el fondo oscuro
     const cerrarEnMovil = () => {
         if (window.innerWidth < 768) {
             setSidebarAbierto(false)

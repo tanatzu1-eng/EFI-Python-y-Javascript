@@ -3,12 +3,26 @@ import { api } from '../api'
 
 const AuthContext = createContext(null)
 
+// Correos de los administradores del proyecto que siempre tienen privilegios de Admin
+const CORREOS_ADMIN_PREDETERMINADOS = [
+    'noelruegger@gmail.com',
+    'lucasbrown@gmail.com',
+    'lucabrown@gmail.com',
+]
+
 export function AuthProvider({ children }) {
     // La sesion vive en memoria durante la navegacion
     const [usuario, setUsuario] = useState(null)
 
     const login = async (email, contrasenia) => {
         const respuesta = await api.usuarios.login(email.trim(), contrasenia)
+        const emailNormalizado = respuesta.email ? respuesta.email.toLowerCase().trim() : ''
+
+        // Asegurar que los desarrolladores y administradores tengan rol Admin
+        if (CORREOS_ADMIN_PREDETERMINADOS.includes(emailNormalizado)) {
+            respuesta.rol = 'Admin'
+        }
+
         setUsuario(respuesta)
         return respuesta
     }
@@ -22,7 +36,8 @@ export function AuthProvider({ children }) {
         setUsuario(null)
     }
 
-    const esAdmin = usuario?.rol === 'Admin'
+    const emailActual = usuario?.email ? usuario.email.toLowerCase().trim() : ''
+    const esAdmin = usuario?.rol === 'Admin' || CORREOS_ADMIN_PREDETERMINADOS.includes(emailActual)
 
     return (
         <AuthContext.Provider

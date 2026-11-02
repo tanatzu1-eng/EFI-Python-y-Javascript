@@ -15,19 +15,30 @@ const FORMULARIO_EVENTO_INICIAL = {
     organizacion_id: '',
 }
 
-function FilaItem({ children, onEditar, onBorrar }) {
+const FORMULARIO_USUARIO_INICIAL = {
+    nombre: '',
+    email: '',
+    fecha_nacimiento: '',
+    contrasenia: '',
+    rol: 'Admin',
+}
+
+function FilaItem({ children, onEditar, onBorrar, extraAccion }) {
     return (
         <Tarjeta className="flex flex-wrap items-center justify-between gap-3 p-4">
             <div className="text-sm">{children}</div>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
+                {extraAccion}
                 {onEditar && (
                     <Boton variante="secundario" onClick={onEditar} className="text-xs py-1.5 px-3">
                         Editar
                     </Boton>
                 )}
-                <Boton variante="peligro" onClick={onBorrar} className="text-xs py-1.5 px-3">
-                    Borrar
-                </Boton>
+                {onBorrar && (
+                    <Boton variante="peligro" onClick={onBorrar} className="text-xs py-1.5 px-3">
+                        Borrar
+                    </Boton>
+                )}
             </div>
         </Tarjeta>
     )
@@ -324,7 +335,27 @@ function AdministrarOrganizaciones() {
 function AdministrarUsuarios() {
     const { usuario } = useAuth()
     const { data, loading, error, reload } = useFetch(() => api.usuarios.list())
+    const [formUser, setFormUser] = useState(FORMULARIO_USUARIO_INICIAL)
     const [errorMsg, setErrorMsg] = useState(null)
+    const [exitoMsg, setExitoMsg] = useState(null)
+
+    const cambiarCampo = (campo) => (e) => {
+        setFormUser({ ...formUser, [campo]: e.target.value })
+    }
+
+    const crearUsuario = async (ev) => {
+        ev.preventDefault()
+        setErrorMsg(null)
+        setExitoMsg(null)
+        try {
+            await api.usuarios.create(formUser)
+            setExitoMsg(`Usuario "${formUser.nombre}" creado exitosamente con rol ${formUser.rol}.`)
+            setFormUser(FORMULARIO_USUARIO_INICIAL)
+            reload()
+        } catch (e) {
+            setErrorMsg(e.message)
+        }
+    }
 
     const borrar = async (u) => {
         if (!confirm(`¿Eliminar al usuario "${u.nombre}"?`)) {
@@ -340,11 +371,86 @@ function AdministrarUsuarios() {
 
     return (
         <Estado loading={loading} error={error}>
-            {errorMsg && (
-                <p className="mb-3 text-xs text-red-400 bg-red-500/10 p-2 rounded-lg">
-                    {errorMsg}
-                </p>
-            )}
+            {/* Formulario para crear nuevo usuario / administrador */}
+            <Tarjeta className="mb-6">
+                <header className="mb-4">
+                    <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+                        Crear nuevo usuario o Administrador
+                    </h2>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
+                        Permite registrar un nuevo miembro del equipo con rol Admin para gestionar la plataforma.
+                    </p>
+                </header>
+
+                <form onSubmit={crearUsuario} className="grid gap-4 sm:grid-cols-2">
+                    <Campo
+                        label="Nombre de usuario"
+                        required
+                        placeholder="Ej: Noel Ruegger Albert"
+                        value={formUser.nombre}
+                        onChange={cambiarCampo('nombre')}
+                    />
+
+                    <Campo
+                        label="Correo electrónico"
+                        type="email"
+                        required
+                        placeholder="usuario@gmail.com"
+                        value={formUser.email}
+                        onChange={cambiarCampo('email')}
+                    />
+
+                    <Campo
+                        label="Fecha de nacimiento"
+                        type="date"
+                        required
+                        value={formUser.fecha_nacimiento}
+                        onChange={cambiarCampo('fecha_nacimiento')}
+                    />
+
+                    <Campo
+                        label="Contraseña"
+                        type="password"
+                        required
+                        placeholder="••••••••"
+                        value={formUser.contrasenia}
+                        onChange={cambiarCampo('contrasenia')}
+                    />
+
+                    <label className="block text-sm sm:col-span-2">
+                        <span className="mb-1 block font-medium text-slate-700 dark:text-slate-300">
+                            Rol asignado
+                        </span>
+                        <select
+                            value={formUser.rol}
+                            onChange={cambiarCampo('rol')}
+                            className="w-full sm:w-64 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-slate-900 dark:text-slate-100 text-sm outline-none focus:border-indigo-500"
+                        >
+                            <option value="Admin">Admin (Permisos para crear y editar)</option>
+                            <option value="Usuario">Usuario (Solo lectura y suscripción)</option>
+                        </select>
+                    </label>
+
+                    {errorMsg && (
+                        <p className="text-xs text-red-400 bg-red-500/10 p-2.5 rounded-xl sm:col-span-2">
+                            {errorMsg}
+                        </p>
+                    )}
+
+                    {exitoMsg && (
+                        <p className="text-xs text-emerald-400 bg-emerald-500/10 p-2.5 rounded-xl sm:col-span-2">
+                            {exitoMsg}
+                        </p>
+                    )}
+
+                    <div className="sm:col-span-2 pt-2">
+                        <Boton type="submit" variante="primario">
+                            Crear usuario con rol {formUser.rol}
+                        </Boton>
+                    </div>
+                </form>
+            </Tarjeta>
+
             <div className="grid gap-3">
                 {data?.map((u) => (
                     <FilaItem
@@ -359,7 +465,13 @@ function AdministrarUsuarios() {
                     >
                         <p className="font-bold text-slate-900 dark:text-slate-100">
                             {u.nombre}{' '}
-                            <span className="ml-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                            <span
+                                className={`ml-1 text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                                    u.rol === 'Admin'
+                                        ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/30'
+                                        : 'bg-slate-500/15 text-slate-600 dark:text-slate-400 border border-slate-500/20'
+                                }`}
+                            >
                                 {u.rol}
                             </span>
                         </p>
@@ -376,7 +488,7 @@ function AdministrarUsuarios() {
 const PESTANIAS = {
     eventos: ['Eventos Culturales', AdministrarEventos],
     organizaciones: ['Organizaciones', AdministrarOrganizaciones],
-    usuarios: ['Usuarios Registrados', AdministrarUsuarios],
+    usuarios: ['Usuarios y Roles', AdministrarUsuarios],
 }
 
 export default function Admin() {
