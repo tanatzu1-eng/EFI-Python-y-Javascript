@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api } from '../api'
 import { useAuth } from '../contexto/AuthContext'
@@ -6,6 +7,8 @@ import { Boton, Estado, Tarjeta, Titulo } from '../componentes/ui'
 
 export default function Suscripciones() {
     const { usuario } = useAuth()
+    const [limiteVisible, setLimiteVisible] = useState(9)
+
     const { data, loading, error, reload } = useFetch(
         () => (usuario ? api.usuarios.get(usuario.id) : Promise.resolve(null)),
         [usuario?.id]
@@ -42,6 +45,11 @@ export default function Suscripciones() {
     }
 
     const lista = data?.suscripcion || []
+    const listaMostrada = lista.slice(0, limiteVisible)
+
+    const mostrarMas = () => {
+        setLimiteVisible((prev) => prev + 9)
+    }
 
     return (
         <section aria-labelledby="titulo-suscripciones" className="max-w-4xl mx-auto py-4">
@@ -63,44 +71,59 @@ export default function Suscripciones() {
                         </div>
                     </Tarjeta>
                 ) : (
-                    <div className="grid gap-4 sm:grid-cols-2">
-                        {lista.map((sub) => (
-                            <Tarjeta
-                                key={sub.id}
-                                className="flex flex-col justify-between gap-4"
-                            >
-                                <div className="flex items-start gap-3">
-                                    <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-sm shrink-0">
-                                        🏛️
+                    <>
+                        <div className="grid gap-4 sm:grid-cols-2">
+                            {listaMostrada.map((sub) => (
+                                <Tarjeta
+                                    key={sub.id}
+                                    className="flex flex-col justify-between gap-4"
+                                >
+                                    <div className="flex items-start gap-3">
+                                        <div className="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-sm shrink-0">
+                                            🏛️
+                                        </div>
+                                        <div>
+                                            <h2 className="font-semibold text-lg text-slate-900 dark:text-slate-100">
+                                                {sub.organizacion?.nombre || 'Organización'}
+                                            </h2>
+                                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                                                Suscripción activa
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h2 className="font-semibold text-lg text-slate-900 dark:text-slate-100">
-                                            {sub.organizacion?.nombre || 'Organización'}
-                                        </h2>
-                                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                                            Suscripción activa
-                                        </p>
-                                    </div>
-                                </div>
 
-                                <div className="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-700/60">
-                                    <Link
-                                        to={`/organizaciones/${sub.organizacion?.id}`}
-                                        className="text-sm font-medium text-indigo-500 hover:text-indigo-400 hover:underline"
-                                    >
-                                        Ver eventos →
-                                    </Link>
-                                    <Boton
-                                        variante="secundario"
-                                        onClick={() => cancelarSuscripcion(sub.id)}
-                                        className="text-xs py-1.5 px-3"
-                                    >
-                                        Anular suscripción
-                                    </Boton>
-                                </div>
-                            </Tarjeta>
-                        ))}
-                    </div>
+                                    <div className="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-700/60">
+                                        <Link
+                                            to={`/organizaciones/${sub.organizacion?.id}`}
+                                            className="text-sm font-medium text-indigo-500 hover:text-indigo-400 hover:underline"
+                                        >
+                                            Ver eventos →
+                                        </Link>
+                                        <Boton
+                                            variante="secundario"
+                                            onClick={() => cancelarSuscripcion(sub.id)}
+                                            className="text-xs py-1.5 px-3"
+                                        >
+                                            Anular suscripción
+                                        </Boton>
+                                    </div>
+                                </Tarjeta>
+                            ))}
+                        </div>
+
+                        {/* Boton Mostrar mas si hay mas suscripciones que el limite actual */}
+                        {limiteVisible < lista.length && (
+                            <div className="pt-6 text-center">
+                                <Boton
+                                    variante="secundario"
+                                    onClick={mostrarMas}
+                                    className="px-6 py-2.5 text-sm font-semibold"
+                                >
+                                    Mostrar más
+                                </Boton>
+                            </div>
+                        )}
+                    </>
                 )}
             </Estado>
         </section>
