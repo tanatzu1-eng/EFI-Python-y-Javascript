@@ -35,7 +35,15 @@ export default function Footer() {
                                 Noel Rüegger Albert
                             </strong>
                             <span className="text-indigo-600 dark:text-indigo-400 font-medium">
-                                Gestor de Base de Datos, diseñador gráfico, API y Front End
+                                Gestor de Base de Datos, Diseñador Grafico, Artista, API y Front End
+                            </span>
+                        </li>
+                        <li className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+                            <strong className="block text-slate-900 dark:text-slate-100 font-semibold">
+                                Francisco Sbarra
+                            </strong>
+                            <span className="text-indigo-600 dark:text-indigo-400 font-medium">
+                                CEO y Gestor de Tareas
                             </span>
                         </li>
                     </ul>
