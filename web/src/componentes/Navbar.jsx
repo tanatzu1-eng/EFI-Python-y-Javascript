@@ -10,22 +10,6 @@ export default function Navbar({ toggleSidebar }) {
     const navigate = useNavigate()
     const contenedorUsuarioRef = useRef(null)
 
-    // Cerrar el recuadro de usuario al hacer click afuera
-    useEffect(() => {
-        function handleClickAfuera(evento) {
-            if (
-                contenedorUsuarioRef.current &&
-                !contenedorUsuarioRef.current.contains(evento.target)
-            ) {
-                setMenuUsuarioAbierto(false)
-            }
-        }
-        document.addEventListener('mousedown', handleClickAfuera)
-        return () => {
-            document.removeEventListener('mousedown', handleClickAfuera)
-        }
-    }, [])
-
     const manejarBusqueda = (e) => {
         e.preventDefault()
         if (busqueda.trim()) {
@@ -69,9 +53,9 @@ export default function Navbar({ toggleSidebar }) {
                         {/* Espacio reservado para version cuadrada redondeada */}
                         <LogoEspacio
                             tipo="cuadrado-redondeado"
-                            texto="El Imaginario"
                             className="group-hover:scale-105 transition duration-150"
                         />
+
                         <span className="hidden min-[420px]:inline">El Imaginario</span>
                     </Link>
                 </div>

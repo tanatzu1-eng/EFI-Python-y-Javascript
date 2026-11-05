@@ -26,7 +26,7 @@ export default function Suscripciones() {
     if (!usuario) {
         return (
             <section aria-labelledby="titulo-suscripciones" className="max-w-2xl mx-auto py-6">
-                <Titulo id="titulo-suscripciones">Mis suscripciones</Titulo>
+                <Titulo id="titulo-organizaciones">Mis suscripciones</Titulo>
                 <Tarjeta className="text-center py-10 space-y-4">
                     <p className="text-lg font-medium text-slate-800 dark:text-slate-200">
                         Inicia sesión para gestionar tus organizaciones favoritas

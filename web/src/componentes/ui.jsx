@@ -87,7 +87,7 @@ export function Volver({ to, children }) {
 }
 
 // Espacio reservado para las distintas versiones del logo
-export function LogoEspacio({ tipo = 'cuadrado-redondeado', texto = 'El Imaginario', className = '' }) {
+export function LogoEspacio({ src = "../../img/logo_pagina.png", tipo = 'cuadrado-redondeado', className = '' }) {
     const tipos = {
         'cuadrado': 'w-12 h-12 rounded-none',
         'cuadrado-redondeado': 'w-10 h-10 rounded-xl',
@@ -96,11 +96,10 @@ export function LogoEspacio({ tipo = 'cuadrado-redondeado', texto = 'El Imaginar
     }
 
     return (
-        <figure
-            aria-label={`Espacio reservado para logo (${tipo})`}
-            className={`flex items-center justify-center bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 font-semibold select-none text-xs sm:text-sm ${tipos[tipo]} ${className}`}
-        >
-            <span>{tipo === 'banner' ? `[ Espacio para Logo Banner - ${texto} ]` : 'EI'}</span>
-        </figure>
+        <img
+            src={src}
+            alt="Logo"
+            className={`object-cover ${tipos[tipo]} ${className}`}
+        />
     )
 }

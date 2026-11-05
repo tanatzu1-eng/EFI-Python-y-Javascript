@@ -5,7 +5,6 @@ export default function Footer() {
                 {/* Informacion institucional */}
                 <section aria-labelledby="footer-info">
                     <h3 id="footer-info" className="text-base font-bold text-slate-900 dark:text-slate-100 mb-3 flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-lg bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-xs font-bold">EI</span>
                         El Imaginario
                     </h3>
                     <p className="text-slate-700 dark:text-slate-400 text-xs leading-relaxed mb-3">

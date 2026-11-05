@@ -31,15 +31,6 @@ export default function Organizaciones() {
                 Espacios y Organizaciones Culturales
             </Titulo>
 
-            {/* Espacio reservado para version rectangular tipo banner */}
-            <div className="mb-6">
-                <LogoEspacio
-                    tipo="banner"
-                    texto="Cartelera Cultural Río Cuarto"
-                    className="h-28 sm:h-36"
-                />
-            </div>
-
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                     Explora centros culturales, teatros, murgas y bibliotecas populares de Río Cuarto.
