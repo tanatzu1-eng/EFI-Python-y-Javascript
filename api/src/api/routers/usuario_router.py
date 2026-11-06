@@ -10,7 +10,6 @@ from ..schemas.esquemas import PARAMETROS_ID, not_found
 ADMINS_PREDETERMINADOS = [
     "noelruegger@gmail.com",
     "lucasbrown@gmail.com",
-    "lucabrown@gmail.com",
 ]
 
 router = APIRouter(
