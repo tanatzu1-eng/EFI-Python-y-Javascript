@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import logo_pagina from '../../img/logo_pagina.png'
 
 export function Estado({ loading, error, children }) {
     if (loading) {
@@ -87,7 +88,7 @@ export function Volver({ to, children }) {
 }
 
 // Espacio reservado para las distintas versiones del logo
-export function LogoEspacio({ src = "../../img/logo_pagina.png", tipo = 'cuadrado-redondeado', className = '' }) {
+export function LogoEspacio({ src = logo_pagina, tipo = 'cuadrado-redondeado', className = '' }) {
     const tipos = {
         'cuadrado': 'w-12 h-12 rounded-none',
         'cuadrado-redondeado': 'w-10 h-10 rounded-xl',
