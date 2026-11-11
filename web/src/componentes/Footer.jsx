@@ -42,7 +42,7 @@ export default function Footer() {
                                 Francisco Sbarra
                             </strong>
                             <span className="text-indigo-600 dark:text-indigo-400 font-medium">
-                                CEO y Gestor de Tareas
+                                CEO, Director Tecnico, El 10, Carry, MVP
                             </span>
                         </li>
                     </ul>
