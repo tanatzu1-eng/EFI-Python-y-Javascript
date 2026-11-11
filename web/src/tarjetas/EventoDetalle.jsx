@@ -162,18 +162,9 @@ export default function EventoDetalle() {
                                 Entrada al evento
                             </span>
                             <div className="mt-2 space-y-1">
-                                <p className="text-xs text-slate-600 dark:text-slate-400">
-                                    Precio de lista: <strong className="text-slate-900 dark:text-slate-200">{fmtPrecio(precioBase)}</strong>
-                                </p>
-                                <p className="text-xs text-slate-600 dark:text-slate-400">
-                                    Cargo de servicio (+10%): <strong className="text-slate-900 dark:text-slate-200">{fmtPrecio(recargoDiezPorciento)}</strong>
-                                </p>
                                 <p className="text-2xl font-black text-indigo-600 dark:text-indigo-400 pt-1">
                                     {fmtPrecio(precioConRecargo)}
                                 </p>
-                                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">
-                                    Precio final con 10% de importe incluido
-                                </span>
                             </div>
                         </div>
 
@@ -238,22 +229,6 @@ export default function EventoDetalle() {
                                     <span>↗</span>
                                 </a>
                             </div>
-                        </div>
-
-                        {/* Recuadro visual estilizado de mapa */}
-                        <div className="h-40 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700 flex flex-col items-center justify-center p-4 text-center">
-                            <span className="text-3xl mb-1">🗺️</span>
-                            <p className="text-xs font-semibold text-slate-800 dark:text-slate-200">
-                                {e?.lugar}
-                            </p>
-                            <a
-                                href={enlaceMaps}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-xs text-indigo-600 dark:text-indigo-400 hover:underline mt-1 font-semibold"
-                            >
-                                Abrir mapa en nueva pestaña →
-                            </a>
                         </div>
                     </section>
                 </div>
