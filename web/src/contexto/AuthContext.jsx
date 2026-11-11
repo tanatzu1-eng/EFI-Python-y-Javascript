@@ -35,8 +35,8 @@ export function AuthProvider({ children }) {
         setUsuario(null)
     }
 
-    const emailActual = usuario.email ? usuario.email.toLowerCase().trim() : ''
-    const esAdmin = usuario.rol === 'Admin' || CORREOS_ADMIN_PREDETERMINADOS.includes(emailActual)
+    const emailActual = usuario?.email ? usuario.email.toLowerCase().trim() : ''
+    const esAdmin = usuario?.rol === 'Admin' || CORREOS_ADMIN_PREDETERMINADOS.includes(emailActual)
 
     return (
         <AuthContext.Provider
