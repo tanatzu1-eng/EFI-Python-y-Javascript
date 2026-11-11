@@ -377,9 +377,6 @@ function AdministrarUsuarios() {
                     <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">
                         Crear nuevo usuario o Administrador
                     </h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">
-                        Permite registrar un nuevo miembro del equipo con rol Admin para gestionar la plataforma.
-                    </p>
                 </header>
 
                 <form onSubmit={crearUsuario} className="grid gap-4 sm:grid-cols-2">
@@ -456,7 +453,7 @@ function AdministrarUsuarios() {
                     <FilaItem
                         key={u.id}
                         onBorrar={() => {
-                            if (u.id === usuario?.id) {
+                            if (u.id === usuario.id) {
                                 alert('No puedes eliminar tu propia cuenta en sesión')
                             } else {
                                 borrar(u)
@@ -465,15 +462,6 @@ function AdministrarUsuarios() {
                     >
                         <p className="font-bold text-slate-900 dark:text-slate-100">
                             {u.nombre}{' '}
-                            <span
-                                className={`ml-1 text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                                    u.rol === 'Admin'
-                                        ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/30'
-                                        : 'bg-slate-500/15 text-slate-600 dark:text-slate-400 border border-slate-500/20'
-                                }`}
-                            >
-                                {u.rol}
-                            </span>
                         </p>
                         <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                             {u.email}

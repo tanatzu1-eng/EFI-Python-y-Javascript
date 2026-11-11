@@ -257,51 +257,6 @@ export default function EventoDetalle() {
 
                         <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
                             <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
-                                🎭 Temática
-                            </dt>
-                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
-                                Cultural / Artístico / Recreativo
-                            </dd>
-                        </div>
-
-                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
-                                🎪 Actividad
-                            </dt>
-                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
-                                Presentación en vivo, exhibición y encuentro comunitario
-                            </dd>
-                        </div>
-
-                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
-                                🌟 Anfitrión/es y participantes
-                            </dt>
-                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
-                                Artistas locales y elenco de {e?.organizacion?.nombre || 'Río Cuarto'}
-                            </dd>
-                        </div>
-
-                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
-                                🏷️ Descuentos
-                            </dt>
-                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
-                                20% para estudiantes y jubilados en boletería
-                            </dd>
-                        </div>
-
-                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
-                                🔞 Clasificación de edad
-                            </dt>
-                            <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
-                                Apto para todo público (ATP)
-                            </dd>
-                        </div>
-
-                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/40 border border-slate-200/60 dark:border-slate-800">
-                            <dt className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                                 ☎️ Contacto de soporte
                             </dt>
                             <dd className="font-bold text-slate-900 dark:text-slate-100 mt-0.5">
