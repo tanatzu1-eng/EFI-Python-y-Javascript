@@ -30,6 +30,15 @@ export default function Sidebar({ abierto, cerrarEnMovil }) {
             >
                 <nav className="space-y-1">
                     <NavLink
+                        to="/eventos"
+                        onClick={cerrarEnMovil}
+                        className={estiloLink}
+                    >
+                        <span className="text-lg">🎟️</span>
+                        <span>Todos los eventos</span>
+                    </NavLink>
+
+                    <NavLink
                         to="/"
                         end
                         onClick={cerrarEnMovil}
@@ -37,15 +46,6 @@ export default function Sidebar({ abierto, cerrarEnMovil }) {
                     >
                         <span className="text-lg">🏛️</span>
                         <span>Organizaciones</span>
-                    </NavLink>
-
-                    <NavLink
-                        to="/eventos"
-                        onClick={cerrarEnMovil}
-                        className={estiloLink}
-                    >
-                        <span className="text-lg">🎟️</span>
-                        <span>Todos los eventos</span>
                     </NavLink>
 
                     <NavLink
